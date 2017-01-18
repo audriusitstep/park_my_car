@@ -20,8 +20,11 @@
 
 <% end %>
 
-<h2> Parking <%= Parking.first.name %></h2>
-<% Parking.first.cars.each do |car| %>
-  <%= car.name %> <%= car.park_for %><br>
+<% Parking.all.each do |parking| %>
+  <h2> Parking <%= parking.name %> <%= parking.balance %></h2>
+    <% parking.cars.each do |car| %>
+      <%= car.name %> Parked At: <%= convert_time(car.parket_at) %> 
+      To: <%= convert_time(car.park_for) %> 
+      <%= money_format(car.balance) %><br>
+    <% end %>
 <% end %>
-

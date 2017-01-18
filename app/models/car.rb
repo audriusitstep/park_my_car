@@ -9,7 +9,19 @@ class Car < ApplicationRecord
   end
 
   def park_for
-    ParkingCar.where(car_id: id, parking_id: parkings.first.id).first.park_for
+    parking_car.park_for
+  end
+
+  def parket_at
+    parking_car.created_at
+  end
+
+  def balance
+    parking_car.balance
+  end
+
+  def parking_car
+    ParkingCar.where(car_id: id, parking_id: parkings.first.id).first
   end
 
 end
