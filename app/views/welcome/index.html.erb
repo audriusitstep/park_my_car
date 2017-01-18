@@ -1,0 +1,27 @@
+<h1>Welcome#index</h1>
+<p>Find me in app/views/welcome/index.html.erb</p>
+
+
+<% @cars.each do |car| %>
+
+  <%= form_tag park_car_path do %>
+    <%= car.name %> 
+   
+    <%= hidden_field_tag :car_id, car.id %>
+    
+    <%= select_tag "park_for", options_for_select(Parking::PARKING_TIMES, Parking::DEFAULT_PARKING_TIME) %>
+
+    <%= select_tag :parking_id,
+       options_from_collection_for_select(@parkings, "id", "name"),
+       onchange: "this.form.submit();", include_blank: 'Pasirinkite' %>
+
+    <br/> 
+  <% end %>
+
+<% end %>
+
+<h2> Parking <%= Parking.first.name %></h2>
+<% Parking.first.cars.each do |car| %>
+  <%= car.name %> <%= car.park_for %><br>
+<% end %>
+
