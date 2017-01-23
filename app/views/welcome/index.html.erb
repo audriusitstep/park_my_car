@@ -20,14 +20,44 @@
 
 <% end %>
 
-<% Parking.all.each do |parking| %>
-  <h2> Parking <%= parking.name %> <%= parking.balance %></h2>
-    <% parking.cars.each do |car| %>
-      <%= car.name %> Parked At: <%= convert_time(car.parket_at) %> 
-      To: <%= convert_time(car.park_for) %> 
-      <span id="parking_car_balance_<%= car.parking_car.id %>">
-        <%= money_format(car.balance) %>
-      </span>
-      <br>
+<div class="row">
+  <div class="col-sm-8">
+    <% Parking.all.each do |parking| %>
+      <h2> Parking <%= parking.name %> <%= parking.balance %></h2>
+        <table class="table">
+          <thead>
+            <th>Car number</th>
+            <th>Model</th>
+            <th>Parking At</th>
+            <th>Until</th>
+            <th>Balance</th>
+            <th>Progress</th>
+          </thead>
+          <tbody>
+            <% parking.cars.each do |car| %>
+              <tr id="parking_car_row_<%= car.parking_car.id %>">
+                <td class="col-md-1"><%= car.number %></td>
+                <td class="col-md-1"><%= car.model %></td>
+                <td class="col-md-2"><%= convert_time(car.parket_at) %></td>
+                <td class="col-md-2"><%= convert_time(car.park_for) %></td>
+                <td class="col-md-2">
+                  <span id="parking_car_balance_<%= car.parking_car.id %>">
+                    <%= money_format(car.balance) %>
+                  </span>
+                </td>
+                <td class="col-md-3">
+
+                <div class="progress">
+                  <div class="progress-bar" id="progress_park_car_<%= car.parking_car.id %>" role="progressbar" aria-valuenow="<%= car.parking_car.progress %>" aria-valuemin="0" aria-valuemax="100" style="width:<%= car.parking_car.progress %>%">
+                    <span><%= car.parking_car.progress %></span>
+                  </div>
+                </div>
+
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
     <% end %>
-<% end %>
+  </div>
+</div>

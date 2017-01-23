@@ -6,7 +6,7 @@ class ParkChargerWorker
 
   #recurrence { secondly(15) }
 
-  recurrence { minutely.second_of_minute(0, 10, 20, 30, 40, 50, 55) }
+  recurrence { minutely.second_of_minute(0) }
 
   def perform
     ParkingCar.find_each do |parking_car|
