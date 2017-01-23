@@ -25,6 +25,9 @@
     <% parking.cars.each do |car| %>
       <%= car.name %> Parked At: <%= convert_time(car.parket_at) %> 
       To: <%= convert_time(car.park_for) %> 
-      <%= money_format(car.balance) %><br>
+      <span id="parking_car_balance_<%= car.parking_car.id %>">
+        <%= money_format(car.balance) %>
+      </span>
+      <br>
     <% end %>
 <% end %>

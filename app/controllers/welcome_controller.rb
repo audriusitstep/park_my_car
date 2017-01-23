@@ -14,5 +14,9 @@ class WelcomeController < ApplicationController
     redirect_to root_path
   end
 
+  def parking_status
+    render json: ParkingCar.all.to_json
+  end
+
 end
 
